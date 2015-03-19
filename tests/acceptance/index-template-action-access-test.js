@@ -21,7 +21,7 @@ test('visiting / shows other content when the user IS NOT an admin', function(as
   visit('/');
 
   andThen(function() {
-    assert.ok(find('.no-access-to-admin'));
+    assert.equal(find('.access-block').text(), 'Not Admin', 'can-access else block IS visible');
   });
 });
 
@@ -33,6 +33,6 @@ test('visiting / shows an admin link when the user IS an admin', function(assert
   visit('/');
 
   andThen(function() {
-    assert.ok(find('.has-access-to-admin'));
+    assert.ok(find('.access-block').text(), 'Admin', 'can-access if block IS visible');
   });
 });

@@ -11,8 +11,10 @@ Ember Sanctify is designed around the idea that simple policy objects control ap
 
 This simple example allows accessing the edit route of a post if the user is an admin:
 
-`app/policys/posts/edit.js`
+`app/policys/posts/edit.js`:
 ```js
+import Ember from 'ember';
+
 export default Ember.Object.extend({
   /* Inject a session service to provide the authorization object with user access */
   session: Ember.inject.service(),
@@ -24,6 +26,18 @@ export default Ember.Object.extend({
     var user = this.get('session.user');
 
     return Ember.get(this, 'session.user.isAdmin');
+  }
+});
+```
+
+`app/routes/posts/edit.js`:
+```js
+import Ember from 'ember';
+import Authorizable from 'ember-sanctify/mixins/routes/authorizable';
+
+export default Ember.Route.extend(Authorizable, {
+  model: function(params) {
+    return this.store.find('post', params.post_id);
   }
 });
 ```

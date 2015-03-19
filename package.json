@@ -11,7 +11,7 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "http://github.com/inigo-llc/ember-sanctify/",
+  "repository": "http://github.com/inigo-llc/ember-sanctify",
   "engines": {
     "node": ">= 0.10.0"
   },

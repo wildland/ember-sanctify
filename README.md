@@ -18,12 +18,12 @@ export default Ember.Object.extend({
   session: Ember.inject.service(),
 
   /*
-    Validates if the user has access to the `posts.edit` route.
+    Validates if the user is and admin and provides access to the `posts.edit` route.
   */
   canAccess: function(/*route, model*/) {
     var user = this.get('session.user');
 
-    return Ember.get(this, 'session.user.isAdmin') === true;
+    return Ember.get(this, 'session.user.isAdmin');
   }
 });
 ```

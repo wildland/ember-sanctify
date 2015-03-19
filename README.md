@@ -1,7 +1,7 @@
 ember-sanctify
 ===============
 
-Minimal authorization through Object Oriented design. Highly inspired by the (Pundit)[https://github.com/elabs/pundit] gem.
+Minimal authorization through Object Oriented design. Highly inspired by the [Pundit](https://github.com/elabs/pundit) gem.
 
 ## Installation
 `ember install:addon ember-sanctify`

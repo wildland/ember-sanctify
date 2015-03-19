@@ -23,12 +23,7 @@ export default Ember.Object.extend({
   canAccess: function(/*route, model*/) {
     var user = this.get('session.user');
 
-    if (user) {
-      return Ember.get(user, 'isAdmin') === true;
-    }
-    else {
-      return false;
-    }
+    return Ember.get(this, 'session.user.isAdmin') === true;
   }
 });
 ```

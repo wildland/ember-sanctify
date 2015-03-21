@@ -1,5 +1,6 @@
-ember-sanctify
+ember-sanctify 
 ===============
+[![Dependency Status](https://david-dm.org/inigo-llc/ember-sanctify.svg)](https://david-dm.org/inigo-llc/ember-sanctify) [![Build Status](https://travis-ci.org/inigo-llc/ember-sanctify.svg)](https://travis-ci.org/inigo-llc/ember-sanctify) [![Code Climate](https://codeclimate.com/github/inigo-llc/ember-sanctify/badges/gpa.svg)](https://codeclimate.com/github/inigo-llc/ember-sanctify)
 
 Minimal authorization through Object Oriented design. Highly inspired by the [Pundit](https://github.com/elabs/pundit) gem.
 

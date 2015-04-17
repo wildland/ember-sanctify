@@ -11,12 +11,12 @@
     "build": "ember build",
     "test": "ember try:testall"
   },
-  "repository": "http://github.com/inigo-llc/ember-sanctify",
+  "repository": "http://github.com/wildland/ember-sanctify",
   "engines": {
     "node": ">= 0.10.0"
   },
   "bugs": {
-    "url": "http://github.com/inigo-llc/ember-sanctify/issues",
+    "url": "http://github.com/wildland/ember-sanctify/issues",
     "email": "samsinite@gmail.com"
   },
   "contributors": [

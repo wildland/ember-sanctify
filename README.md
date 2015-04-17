@@ -1,8 +1,14 @@
-ember-sanctify 
+ember-sanctify
 ===============
 [![Dependency Status](https://david-dm.org/inigo-llc/ember-sanctify.svg)](https://david-dm.org/inigo-llc/ember-sanctify) [![Build Status](https://travis-ci.org/inigo-llc/ember-sanctify.svg)](https://travis-ci.org/inigo-llc/ember-sanctify) [![Code Climate](https://codeclimate.com/github/inigo-llc/ember-sanctify/badges/gpa.svg)](https://codeclimate.com/github/inigo-llc/ember-sanctify)
 
 Minimal authorization through Object Oriented design. Highly inspired by the [Pundit](https://github.com/elabs/pundit) gem.
+
+## Breaking Changes
+ember-sanctify changed the syntax for the can-access helper to add support for ember 1.11. The can-access helper now uses handlebars sub-expressions, which simplified the whole codebase. See [here](#can-access) for details.
+
+## Requirements
+ember-sanctify only supports Ember >= 1.10
 
 ## Installation
 `ember install:addon ember-sanctify`
@@ -52,15 +58,16 @@ Using a simple authorization object provides developers with the ability to keep
 
 
 # Template content authorization
-Authorizing access to template content is provided by using the `can-access` helper inside of the desired template.
+Authorizing access to template content is provided by using the `can-access` sub-expression helper inside of the desired template.
 
 This example allows the user to create a post as long as they are authenticated:
+<a id="can-access"></a>
 ```html
-{{#can-access 'post' 'create'}}
+{{#if (can-access 'post' 'create')}}
   {{#link-to 'posts.new'}}New Post{{/link-to}}
 {{else}}
   Please {{#link-to 'login'}}log in{{/link-to}} to create a new post.
-{{/can-access}}
+{{/if}}
 ```
 The first argument is the path to the authorization policy, the second is the name method to call on the authorization policy. The example above the can-access helper would call the method `canCreate`.
 
@@ -75,9 +82,9 @@ export default Ember.Object.extend({
     return this.get('session.user');
   }
 ```
-The `can-access` helper capitalizes the second parameter, and prefixes it with the string `can` before looking up and calling the authorization method on the defined policy. It also excepts optional arguments.
+The `can-access` sub-expression capitalizes the second parameter, and prefixes it with the string `can` before looking up and calling the authorization method on the defined policy. It also excepts optional arguments.
 ```html
-{{#can-access 'post' 'edit' model}}...{{/can-access}}
+{{#if (can-access 'post' 'edit' model)}}...{{else}}...{{/if}}
 ```
 
 Feel free to look through the `tests/dummy` application for more examples.

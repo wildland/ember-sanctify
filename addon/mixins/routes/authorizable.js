@@ -46,6 +46,7 @@ export default Ember.Mixin.create({
     }).catch(function(e) {
       console.log('Error processing policy: ', e);
       invalidAccess(self, authorizationPolicy, transition);
+      throw e;
     });
   }
 });

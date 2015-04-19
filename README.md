@@ -14,11 +14,11 @@ ember-sanctify only supports Ember >= 1.10
 `ember install:addon ember-sanctify`
 
 ## Policies
-Ember Sanctify is designed around the idea that simple policy objects control approving and denying access to related resources. These objects are located inside of `app/policys` (because the resolver incorrectly pluralizes the word "policy"). The path of these policies is important as policies are automatically looked up based off of route paths.
+Ember Sanctify is designed around the idea that simple policy objects control approving and denying access to related resources. These objects are located inside of `app/policies`. The path of these policies is important as policies are automatically looked up based off of route paths.
 
 This simple example allows accessing the edit route of a post if the user is an admin:
 
-`app/policys/posts/edit.js`:
+`app/policies/posts/edit.js`:
 ```js
 import Ember from 'ember';
 
@@ -54,7 +54,7 @@ Using a simple authorization object provides developers with the ability to keep
  - If the user is denied access, the transition is aborted. If a `redirectionRoute` property exists on the policy, the user will be redirected to the specified route.
  - Validation is done during the `afterModel` callback on the route to provide the developer with access to the model if needed. If the developer needs to override the afterModel callback, be sure to call `this._super(model, transition)`.
  - The `canAccess` method can optionally return a promise so that async data can be accessed when needed.
- - If a policy is not found, the library falls back to whatever is specified by the policy that the resolver resolves at 'policy:application'. By default, this policy denies all access. To override generate a new application default policy inside of `app/policys/application.js`.
+ - If a policy is not found, the library falls back to whatever is specified by the policy that the resolver resolves at 'policy:application'. By default, this policy denies all access. To override generate a new application default policy inside of `app/policies/application.js`.
 
 
 # Template content authorization
@@ -71,7 +71,7 @@ This example allows the user to create a post as long as they are authenticated:
 ```
 The first argument is the path to the authorization policy, the second is the name method to call on the authorization policy. The example above the can-access helper would call the method `canCreate`.
 
-The policy (`app/policys/post.js`) for authorizing the action in the above template could look like so:
+The policy (`app/policies/post.js`) for authorizing the action in the above template could look like so:
 ```js
 export default Ember.Object.extend({
   /* Inject a session service to provide the authorization object with user access */

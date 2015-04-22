@@ -99,3 +99,6 @@ Feel free to look through the `tests/dummy` application for more examples.
 * `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+## Code Of Conduct
+Wildland Open Source [Code Of Conduct](https://github.com/wildland/code-of-conduct)

@@ -5,13 +5,20 @@ ember-sanctify
 Minimal authorization through Object Oriented design. Highly inspired by the [Pundit](https://github.com/elabs/pundit) gem.
 
 ## Breaking Changes
-ember-sanctify changed the syntax for the can-access helper to add support for ember 1.11. The can-access helper now uses handlebars sub-expressions, which simplified the whole codebase. See [here](#can-access) for details.
+In 0.2.0 ember-sanctify updated the resolver to correctly resolve policies to `app/policies` instead `app/policy`. The directory will need renamed if upgrading from a previous version to maintain compatibility.
 
 ## Requirements
 ember-sanctify only supports Ember >= 1.10
 
 ## Installation
 `ember install:addon ember-sanctify`
+
+## Compatibility
+| Ember Version      | Ember Can Release     |
+| ------------------ | --------------------- |
+| 1.9.x and lower    | No Support            |
+| 1.10 through 1.12  | 0.1.x                 |
+| 1.13 and beyond    | 0.2.x                 |
 
 ## Policies
 Ember Sanctify is designed around the idea that simple policy objects control approving and denying access to related resources. These objects are located inside of `app/policies`. The path of these policies is important as policies are automatically looked up based off of route paths.

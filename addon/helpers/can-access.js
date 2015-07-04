@@ -1,21 +1,5 @@
 import Ember from 'ember';
 
-var get = Ember.get;
-var set = Ember.set;
-var _guid = 0;
-
-function guid(policyName, actionName) {
-  return [policyName, actionName, 'promise', (++_guid)].join('-');
-}
-
-function read(object) {
-  if (object && object.isStream) {
-    return object.value();
-  } else {
-    return object;
-  }
-}
-
 function lookupPolicy(container, policyLookupName) {
   Ember.assert(
     'Must define a path attribute string to check authorization against.',
@@ -51,10 +35,11 @@ function createAccessPromise(authorizationPolicy, authorizableAction, args) {
     authorizableAction
   );
 
-  var canAction = Ember.get(authorizationPolicy, 'can' + capitalizeString(authorizableAction));
+  var canMethod = `can${capitalizeString(authorizableAction)}`;
+  var canAction = Ember.get(authorizationPolicy, canMethod);
 
   Ember.assert(
-    'The authorization policy does not define the action being authorized',
+    `The authorization policy does not define the action '${canMethod}' being authorized`,
     !!canAction
   );
 
@@ -63,33 +48,21 @@ function createAccessPromise(authorizationPolicy, authorizableAction, args) {
   });
 }
 
-export default function(params, hash, options, env) {
-  var policyLookupName = params[0];
-  var action = params[1];
-  var view = env.data.view;
-  var controller = get(view, 'controller');
-  var container = view.container;
-  var args = [];
+export default Ember.Helper.extend({
+  canAccess: false,
+  policy: null,
 
-  for(var i = 2; i < params.length; i++) {
-    args.push(read(params[i]));
-  }
+  compute([policyLookupName, action, ...args]) {
+    var policy = lookupPolicy(this.container, policyLookupName);
 
-  var holder = get(controller, '_policies');
-  if (!holder) {
-    holder = Ember.Object.create();
-    set(controller, '_policies', holder);
-  }
+    createAccessPromise(policy, action, args).then((canAccess) => {
+      this.set('canAccess', canAccess);
+    });
 
-  var policy = lookupPolicy(container, policyLookupName);
-  var accessPromiseId = guid(policyLookupName, action);
-  var canResultPropertyName = ['controller._policies', accessPromiseId].join('.');
-  set(holder, accessPromiseId, false);
+    return this.get('canAccess');
+  },
 
-  createAccessPromise(policy, action, args).then(function(canAccess) {
-    set(holder, accessPromiseId, canAccess);
-  });
-
-  // Might be better to instead store this value on the view?
-  return view.getStream(canResultPropertyName);
-}
+  recomputeAccess: Ember.observer('canAccess', function() {
+    this.recompute();
+  })
+});

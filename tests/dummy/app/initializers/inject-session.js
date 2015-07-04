@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 var Session = Ember.Object.extend({
-  user: null
+  user: {
+    isAdmin: false
+  }
 });
 
 export function initialize(container, application) {

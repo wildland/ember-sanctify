@@ -3,6 +3,7 @@
   "version": "0.2.1",
   "description": "An authorization addon for Ember CLI",
   "homepage": "https://github.com/wildland/ember-sanctify/",
+  "repository": "https://github.com/wildland/ember-sanctify/",
   "bugs": {
     "url": "https://github.com/wildland/ember-sanctify/issues",
     "email": "samsinite@gmail.com"

@@ -57,7 +57,7 @@ export default Ember.Route.extend(Authorizable, {
 ```
 
 Using a simple authorization object provides developers with the ability to keep authorization simple, thus be able to build a robust and scalable authorization system. To help facilitate this, ember-sanctify makes the following assumptions:
- - The return value of `canAccess` method on the associated policy object must eventually validate to a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value for the user to be granted access.
+ - The return value of the `canAccess` method on the associated policy object must eventually validate to a [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) value for the user to be granted access.
  - If the user is denied access, the transition is aborted. If a `redirectionRoute` property exists on the policy, the user will be redirected to the specified route.
  - Validation is done during the `afterModel` callback on the route to provide the developer with access to the model if needed. If the developer needs to override the afterModel callback, be sure to call `this._super(model, transition)`.
  - The `canAccess` method can optionally return a promise so that async data can be accessed when needed.
@@ -76,7 +76,7 @@ This example allows the user to create a post as long as they are authenticated:
   Please {{#link-to 'login'}}log in{{/link-to}} to create a new post.
 {{/if}}
 ```
-The first argument is the path to the authorization policy, the second is the name method to call on the authorization policy. The example above the can-access helper would call the method `canCreate`.
+The first argument is the path to the authorization policy, the second is the method name to call on that authorization policy. In the example above, the can-access helper would call the method `canCreate`.
 
 The policy (`app/policies/post.js`) for authorizing the action in the above template could look like so:
 ```js
@@ -89,7 +89,7 @@ export default Ember.Object.extend({
     return this.get('session.user');
   }
 ```
-The `can-access` sub-expression capitalizes the second parameter, and prefixes it with the string `can` before looking up and calling the authorization method on the defined policy. It also excepts optional arguments.
+The `can-access` sub-expression capitalizes the second parameter and prefixes it with the string `can` before looking up and calling the authorization method on the defined policy. It also excepts optional arguments.
 ```html
 {{#if (can-access 'post' 'edit' model)}}...{{else}}...{{/if}}
 ```

@@ -1,7 +1,15 @@
 {
   "name": "ember-sanctify",
-  "version": "0.2.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.2.1",
+  "description": "An authorization addon for Ember CLI",
+  "homepage": "https://github.com/wildland/ember-sanctify/",
+  "bugs": {
+    "url": "https://github.com/wildland/ember-sanctify/issues",
+    "email": "samsinite@gmail.com"
+  },
+  "contributors": [
+    "Sam Clopton <samsinite@gmail.com> (http://wild.land/)"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
